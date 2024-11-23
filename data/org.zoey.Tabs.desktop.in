@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=tabs
+Exec=tabs
+Icon=org.zoey.Tabs
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=GTK;
+StartupNotify=true
+DBusActivatable=true

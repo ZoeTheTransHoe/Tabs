@@ -1,0 +1,8 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+data/org.zoey.Tabs.desktop.in
+data/org.zoey.Tabs.metainfo.xml.in
+data/org.zoey.Tabs.gschema.xml
+src/main.py
+src/window.py
+src/window.ui

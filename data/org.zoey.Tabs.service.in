@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.zoey.Tabs
+Exec=@bindir@/tabs --gapplication-service
