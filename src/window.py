@@ -17,15 +17,16 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw
-from gi.repository import Gtk
+from gi.repository import Adw, Gio, GLib, Gtk, Pango
 
-@Gtk.Template(resource_path='/org/zoey/Tabs/window.ui')
+@Gtk.Template(resource_path='/org/zoey/Tabs/../data/ui/welcome.ui')
 class TabsWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'TabsWindow'
     
-    myImage = Gtk.Picture()
+    # desc = Gtk.Template.Child()
+    # string = "Drag and Drop a tab file here to open it"
 
-    myImage.set_filename("./flatpak-symbolic.svg")
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        # self.desc.set_label(self.string)
