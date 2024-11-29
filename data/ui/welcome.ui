@@ -1,35 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="../data/css/style.css"?> 
 <interface>
   <requires lib="gtk" version="4.0"/>
   <requires lib="Adw" version="1.0"/>
   <template class="TabsWindow" parent="AdwApplicationWindow">
     <property name="title" translatable="yes">Tabs</property>
-    <property name="default-width">500</property>
-    <property name="default-height">500</property>
+    <property name="default-width">1000</property>
+    <property name="default-height">700</property>
+    <child>
+      <object class="AdwBreakpoint">
+        <condition>max-width: 700sp</condition>
+        <setter object="split_view" property="collapsed">true</setter>
+      </object>
+    </child>
     <property name="content">
       <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar">
-            <child type="end">
-              <object class="GtkMenuButton">
-                <property name="primary">True</property>
-                <property name="icon-name">open-menu-symbolic</property>
-                <property name="tooltip-text" translatable="yes">Main Menu</property>
-                <property name="menu-model">primary_menu</property>
-              </object>
-            </child>
-          </object>
-        </child>
         <property name="content">
-          <object class="AdwClamp">
-            <property name="maximum-size">300</property>
-            <child>
-              <object class="AdwStatusPage" id="welcome_status">
-                <property name="title" translatable="true">Welcome To Tabs 🎸</property>
-                <property name="description" translatable="true">Tabs Message</property>
-                <property name="icon-name">library-music-symbolic</property>
+          <object class="AdwOverlaySplitView" id="split_view">
+            <property name="sidebar">
+              <object class="AdwStatusPage">
+                <property name="title" translatable="true">Sidebar</property>
               </object>
-            </child>
+            </property>
+
+            <property name="content">
+              <object class="GtkBox">
+                <property name="margin-top">18</property>
+                <property name="orientation">1</property>
+                <property name="halign">3</property>
+                <property name="valign">3</property>
+                <child>
+                  <object class="AdwClamp">
+                  <property name="maximum-size">300</property>
+                    <child>
+                      <object class="AdwStatusPage" id="welcome_status">
+                        <property name="title" translatable="true">Welcome To Tabs 🎸</property>
+                        <property name="description" translatable="true">Drag and drop a tab file here</property>
+                        <property name="icon-name">library-music-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                  
+                <child>
+                  <object class="GtkBox" id="welcome_button_box">
+                    <property name="margin-top">18</property>
+                    <property name="orientation">0</property>
+                    <property name="halign">3</property>
+                    <property name="spacing">18</property>
+                    
+                    <child>
+                      <object class="GtkButton" id="download_tabs">
+                        <property name="label">Download Tabs...</property>
+                        <style>
+                          <class name="suggested-action"/>
+                          <class name="pill"/>
+                        </style>
+                      </object>
+
+                    </child>
+
+                    <child>
+                      <object class="GtkButton" id="create_new_tab">
+                        <property name="label">Create New Tab...</property>
+                        <style>
+                          <class name="suggested-action"/>
+                          <class name="pill"/>
+                        </style>
+                      </object>
+                    </child>
+
+                  </object>
+                </child>
+              </object>
+            </property>
+
           </object>
         </property>
       </object>

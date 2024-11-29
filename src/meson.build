@@ -30,6 +30,7 @@ tabs_sources = [
   '__init__.py',
   'main.py',
   'window.py',
+  '../data/style.css',
 ]
 
 install_data(tabs_sources, install_dir: moduledir)

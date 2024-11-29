@@ -5,6 +5,10 @@
     <file preprocess="xml-stripblanks">../data/ui/welcome.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
   <!-- Icons -->
+    <file preprocess="xml-stripblanks">icons/flatpak-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/library-music-symbolic.svg</file>
+  <!-- CSS Files -->
+    <file alias="style.css">../data/style.css</file>
+
     </gresource>
 </gresources>

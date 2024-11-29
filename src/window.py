@@ -23,10 +23,11 @@ from gi.repository import Adw, Gio, GLib, Gtk, Pango
 class TabsWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'TabsWindow'
     
-    # desc = Gtk.Template.Child()
-    # string = "Drag and Drop a tab file here to open it"
+    welcome_status = Gtk.Template.Child()
+
+    # Buttons
+    download_tabs = Gtk.Template.Child()
+    create_new_tab = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-
-        # self.desc.set_label(self.string)
