@@ -7,6 +7,8 @@
     <property name="title" translatable="yes">Tabs</property>
     <property name="default-width">1000</property>
     <property name="default-height">700</property>
+    <property name="width-request">600</property>
+    <property name="height-request">400</property>
     <child>
       <object class="AdwBreakpoint">
         <condition>max-width: 700sp</condition>
@@ -14,15 +16,26 @@
       </object>
     </child>
     <property name="content">
-      <object class="AdwToolbarView">
+      <object class="AdwOverlaySplitView" id="split_view">
+        <property name="sidebar">
+          <object class="AdwToolbarView">
+              <child type="top">
+                <object class="GtkMenuButton" id="primary">
+                  <property name="halign">2</property>
+                  <property name="icon-name">open-menu-symbolic</property>
+                  <!-- <property name="menu-model">primary_button_menu</property> -->
+                  <property name="primary">true</property>
+                </object>
+              </child>
+          </object>
+        </property>
         <property name="content">
-          <object class="AdwOverlaySplitView" id="split_view">
-            <property name="sidebar">
-              <object class="AdwStatusPage">
-                <property name="title" translatable="true">Sidebar</property>
+          <object class="AdwToolbarView">
+            <child type="top">
+              <object class="AdwHeaderBar">
+                <property name="show-title">true</property>
               </object>
-            </property>
-
+            </child>
             <property name="content">
               <object class="GtkBox">
                 <property name="margin-top">18</property>
@@ -57,7 +70,6 @@
                           <class name="pill"/>
                         </style>
                       </object>
-
                     </child>
 
                     <child>
@@ -74,9 +86,9 @@
                 </child>
               </object>
             </property>
-
           </object>
         </property>
+
       </object>
     </property>
   </template>
