@@ -20,14 +20,26 @@
 from gi.repository import Adw, Gio, GLib, Gtk, Pango
 
 @Gtk.Template(resource_path='/org/zoey/Tabs/../data/ui/welcome.ui')
-class TabsWindow(Adw.ApplicationWindow):
+class TabsWelcome(Adw.ApplicationWindow):
     __gtype_name__ = 'TabsWindow'
     
     welcome_status = Gtk.Template.Child()
 
-    # Buttons
+    ### Buttons ###
     download_tabs = Gtk.Template.Child()
     create_new_tab = Gtk.Template.Child()
-
+    # Menu Button
+    open_button = Gtk.Template.Child()
+    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        #TODO - Open a MusicXML or JSON file using file picker.
+        #Action that opens a file picker accepting either a JSON or MusicXML file to load into app.
+        open_tab_action = Gio.SimpleAction(name="open")
+        open_tab_action.connect("activate", self.open_tabs_file)
+        self.add_action(open_tab_action)
+
+    def open_tabs_file(self, action, _):
+        ''' Litteraly Just Prints Meow For Now'''
+        print("Meow")

@@ -24,7 +24,7 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw
-from .window import TabsWindow
+from .welcome import TabsWelcome
 
 
 class TabsApplication(Adw.Application):
@@ -37,6 +37,9 @@ class TabsApplication(Adw.Application):
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action)
 
+        #My Own Keyboard Shortcuts (Shove it).
+        self.set_accels_for_action('welcome.open', ['<Ctrl>o'])
+
     def do_activate(self):
         """Called when the application is activated.
 
@@ -45,7 +48,7 @@ class TabsApplication(Adw.Application):
         """
         win = self.props.active_window
         if not win:
-            win = TabsWindow(application=self)
+            win = TabsWelcome(application=self)
         win.present()
 
     def on_about_action(self, *args):

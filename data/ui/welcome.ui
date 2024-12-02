@@ -8,7 +8,7 @@
     <property name="default-width">1000</property>
     <property name="default-height">700</property>
     <property name="width-request">600</property>
-    <property name="height-request">400</property>
+    <property name="height-request">500</property>
     <child>
       <object class="AdwBreakpoint">
         <condition>max-width: 700sp</condition>
@@ -34,6 +34,12 @@
             <child type="top">
               <object class="AdwHeaderBar">
                 <property name="show-title">true</property>
+                <child type="start">
+                  <object class="GtkButton" id="open_button">
+                    <property name="icon-name">plus-large-symbolic</property>
+                    <property name="action-name">welcome.open</property>
+                  </object>
+                </child>
               </object>
             </child>
             <property name="content">

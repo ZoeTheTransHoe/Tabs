@@ -29,7 +29,7 @@ configure_file(
 tabs_sources = [
   '__init__.py',
   'main.py',
-  'window.py',
+  'welcome.py',
   '../data/style.css',
 ]
 
