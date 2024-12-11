@@ -20,18 +20,28 @@
       <object class="AdwOverlaySplitView" id="split_view">
         <property name="sidebar">
           <object class="AdwToolbarView">
-              <child type="top">
-                <object class="AdwHeaderBar">
-                  <property name="show-title">False</property>
-                  <child type="end">
-                     <object class="GtkMenuButton" id="primary">
-                      <property name="icon-name">open-menu-symbolic</property>
-                      <property name="menu-model">primary_button_menu</property>
-                      <property name="primary">true</property>
-                    </object>
-                  </child>
-                </object>
-              </child>
+            <child type="top">
+              <object class="AdwHeaderBar">
+                <property name="show-title">False</property>
+                <child type="end">
+                   <object class="GtkMenuButton" id="primary">
+                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="menu-model">primary_button_menu</property>
+                    <property name="primary">true</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkScrolledWindow">
+                <child>
+                  <object class="GtkListBox" id="sidebar_list">
+                    <property name="hexpand">True</property>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
         </property>
         <property name="content">
@@ -110,7 +120,6 @@
             </property>
           </object>
         </property>
-
       </object>
     </property>
   </template>

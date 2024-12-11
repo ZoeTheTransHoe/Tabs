@@ -39,7 +39,10 @@ class TabsApplication(Adw.Application):
         self.create_action('preferences', self.on_preferences_action)
 
         #My Own Keyboard Shortcuts (Shove it).
-        self.set_accels_for_action('welcome.open', ['<Ctrl>o'])
+        self.set_accels_for_action('win.open', ['<Ctrl>o'])
+        self.set_accels_for_action('win.download', ['<Ctrl>d'])
+        self.set_accels_for_action('win.create', ['<Ctrl><Alt>n'])
+        self.set_accels_for_action('win.hide_sidebar', ['F9'])
 
     def do_activate(self):
         """Called when the application is activated.

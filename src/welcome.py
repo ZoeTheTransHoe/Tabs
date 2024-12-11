@@ -31,14 +31,16 @@ class TabsWelcome(Adw.ApplicationWindow):
     # Menu Button
     open_button = Gtk.Template.Child()
 
-    ###Sidebar###
+    ### Sidebar ###
+    # Boxes
     split_view = Gtk.Template.Child()
+    sidebar_list = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         print("Welcome.py/TabsWelcome Loaded")
-        #TODO - Open a MusicXML or JSON file using file picker.
+
         #Action that opens a file picker accepting either a JSON or MusicXML file to load into app.
         open_tab_action = Gio.SimpleAction(name="open")
         open_tab_action.connect("activate", self.open_tabs_file)
@@ -59,21 +61,54 @@ class TabsWelcome(Adw.ApplicationWindow):
         hide_sidebar_action.connect("activate", self.toggle_sidebar)
         self.add_action(hide_sidebar_action)
 
-    def download_tab(self, action, _):
-        ''' Litteraly Just Prints Downloading For Now'''
-        print("Downloading...")
+        for x in range(0,2):
+            self.add_sidebar_buttons()
 
+    ### Open XML Tab File ###
     def open_tabs_file(self, action, _):
-        """Litteraly Just Prints Meow"""
-        print("Meow")
+        """Open a MusicXML or JSON file using file picker."""
+        xml_file = Gtk.FileDialog()
+        xml_file.open(self, None, self.open_tabs_file_response)
 
-    def create_tabs_file(self, action, _):
-        """Litteraly Just Prints Create Window"""
-        print("Create Window")
+    def open_tabs_file_response(self, dialog, result):
+        """
+        Tries to send whatever file chosen to processing if a user selects a file
+        and blows up the user if they do not pick a file
+        Args:
+            result: Either the file the user choose or an error if they do not pick a file.
+        """
+        try:
+            file = dialog.open_finish(result)
+            self.process_xml(file)
+        except GLib.GError:
+            print("Blows u up")
 
+    def process_xml(self, file):
+        """ Process XML File"""
+        print(file)
+        pass
+
+
+    ### Sidebar methods###
     def toggle_sidebar(self, action, _):
         """ Reverses visibility status of sidebar"""
         toggle_status = self.split_view.get_show_sidebar()
         self.split_view.set_show_sidebar(not toggle_status)
 
+    def add_sidebar_buttons(self):
+        all_tabs_button = Gtk.ListBoxRow()
+        all_tabs_label = Gtk.Label()
+        all_tabs_label.set_text("All Tabs")
+        all_tabs_button.set_child(all_tabs_label)
+        self.sidebar_list.append(all_tabs_button)
+        pass
 
+
+    ### Other ###
+    def download_tab(self, action, _):
+        ''' Litteraly Just Prints Downloading For Now'''
+        print("Downloading...")
+
+    def create_tabs_file(self, action, _):
+        """Litteraly Just Prints Create Window"""
+        print("Create Window")
