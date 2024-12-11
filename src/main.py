@@ -18,6 +18,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import sys
+from time import sleep
+
 import gi
 
 gi.require_version('Gtk', '4.0')
@@ -25,7 +27,6 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw
 from .welcome import TabsWelcome
-
 
 class TabsApplication(Adw.Application):
     """The main application singleton class."""
@@ -50,7 +51,6 @@ class TabsApplication(Adw.Application):
         if not win:
             win = TabsWelcome(application=self)
         win.present()
-
     def on_about_action(self, *args):
         """Callback for the app.about action."""
         about = Adw.AboutDialog(application_name='tabs',

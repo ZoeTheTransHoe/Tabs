@@ -13,6 +13,7 @@
       <object class="AdwBreakpoint">
         <condition>max-width: 700sp</condition>
         <setter object="split_view" property="collapsed">true</setter>
+        <setter object="toggle_split_view" property="visible">true</setter>
       </object>
     </child>
     <property name="content">
@@ -20,11 +21,15 @@
         <property name="sidebar">
           <object class="AdwToolbarView">
               <child type="top">
-                <object class="GtkMenuButton" id="primary">
-                  <property name="halign">2</property>
-                  <property name="icon-name">open-menu-symbolic</property>
-                  <!-- <property name="menu-model">primary_button_menu</property> -->
-                  <property name="primary">true</property>
+                <object class="AdwHeaderBar">
+                  <property name="show-title">False</property>
+                  <child type="end">
+                     <object class="GtkMenuButton" id="primary">
+                      <property name="icon-name">open-menu-symbolic</property>
+                      <property name="menu-model">primary_button_menu</property>
+                      <property name="primary">true</property>
+                    </object>
+                  </child>
                 </object>
               </child>
           </object>
@@ -34,10 +39,19 @@
             <child type="top">
               <object class="AdwHeaderBar">
                 <property name="show-title">true</property>
+
+                <child type="start">
+                  <object class="GtkButton" id="toggle_split_view">
+                    <property name="icon-name">dock-left-symbolic</property>
+                    <property name="action-name">win.hide_sidebar</property>
+                    <property name="visible">False</property>
+                  </object>
+                </child>
+
                 <child type="start">
                   <object class="GtkButton" id="open_button">
                     <property name="icon-name">plus-large-symbolic</property>
-                    <property name="action-name">welcome.open</property>
+                    <property name="action-name">win.open</property>
                   </object>
                 </child>
               </object>
@@ -69,8 +83,9 @@
                     <property name="spacing">18</property>
                     
                     <child>
-                      <object class="GtkButton" id="download_tabs">
+                      <object class="GtkButton" id="download_tabs_button">
                         <property name="label">Download Tabs...</property>
+                        <property name="action-name">win.download</property>
                         <style>
                           <class name="suggested-action"/>
                           <class name="pill"/>
@@ -79,8 +94,9 @@
                     </child>
 
                     <child>
-                      <object class="GtkButton" id="create_new_tab">
+                      <object class="GtkButton" id="create_new_tab_button">
                         <property name="label">Create New Tab...</property>
+                        <property name="action-name">win.create</property>
                         <style>
                           <class name="suggested-action"/>
                           <class name="pill"/>
@@ -98,7 +114,7 @@
       </object>
     </property>
   </template>
-  <menu id="primary_menu">
+  <menu id="primary_button_menu">
     <section>
       <item>
         <attribute name="label" translatable="yes">_Preferences</attribute>
