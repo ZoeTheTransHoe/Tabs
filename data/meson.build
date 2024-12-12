@@ -12,13 +12,23 @@ if desktop_utils.found()
   test('Validate desktop file', desktop_utils, args: [desktop_file])
 endif
 
-appstream_file = i18n.merge_file(
+if host_machine.system() == 'windows'
+  appstream_file = configure_file(
         input: 'org.zoey.Tabs.metainfo.xml.in',
        output: 'org.zoey.Tabs.metainfo.xml',
        po_dir: '../po',
       install: true,
   install_dir: get_option('datadir') / 'metainfo'
-)
+  )
+else
+  appstream_file = i18n.merge_file(
+          input: 'org.zoey.Tabs.metainfo.xml.in',
+        output: 'org.zoey.Tabs.metainfo.xml',
+        po_dir: '../po',
+        install: true,
+    install_dir: get_option('datadir') / 'metainfo'
+  )
+endif
 
 appstreamcli = find_program('appstreamcli', required: false, disabler: true)
 test('Validate appstream file', appstreamcli,

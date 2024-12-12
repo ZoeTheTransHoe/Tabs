@@ -4,6 +4,9 @@ project('tabs',
   default_options: [ 'warning_level=2', 'werror=false', ],
 )
 
+if host_machine.system() != 'windows'
+  i18n = import('i18n')
+endif
 gnome = import('gnome')
 python = import('python')
 
@@ -11,15 +14,6 @@ python = import('python')
 subdir('data')
 subdir('src')
 subdir('po')
-
-profile = get_option('profile')
-if profile == 'development'
-    app_id = 'org.zoey.Tabs.Devel'
-  prefix = '/org/zoey/Tabs/Devel'
-elif profile == 'release'
-  app_id = 'org.zoey.Tabs'
-  prefix = '/org/zoey/Tabs'
-endif
 
 gnome.post_install(
      glib_compile_schemas: true,
