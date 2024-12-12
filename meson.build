@@ -4,7 +4,6 @@ project('tabs',
   default_options: [ 'warning_level=2', 'werror=false', ],
 )
 
-i18n = import('i18n')
 gnome = import('gnome')
 python = import('python')
 
