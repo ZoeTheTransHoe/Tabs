@@ -17,7 +17,18 @@ else
     install_dir: get_option('datadir') / 'applications'
   )
 endif
+desktop_file = i18n.merge_file(
+        input: 'org.zoey.Tabs.desktop.in',
+       output: 'org.zoey.Tabs.desktop',
+         type: 'desktop',
+       po_dir: '../po',
+      install: true,
+  install_dir: get_option('datadir') / 'applications'
+)
 
+desktop_utils = find_program('desktop-file-validate', required: false)
+if desktop_utils.found()
+  test('Validate desktop file', desktop_utils, args: [desktop_file])
 desktop_utils = find_program('desktop-file-validate', required: false)
 if desktop_utils.found()
   test('Validate desktop file', desktop_utils, args: [desktop_file])
@@ -40,6 +51,21 @@ else
     install_dir: get_option('datadir') / 'metainfo'
   )
 endif
+
+appstreamcli = find_program('appstreamcli', required: false, disabler: true)
+test('Validate appstream file', appstreamcli,
+     args: ['validate', '--no-net', '--explain', appstream_file])
+
+install_data('org.zoey.Tabs.gschema.xml',
+  install_dir: get_option('datadir') / 'glib-2.0' / 'schemas'
+)
+appstream_file = i18n.merge_file(
+        input: 'org.zoey.Tabs.metainfo.xml.in',
+       output: 'org.zoey.Tabs.metainfo.xml',
+       po_dir: '../po',
+      install: true,
+  install_dir: get_option('datadir') / 'metainfo'
+)
 
 appstreamcli = find_program('appstreamcli', required: false, disabler: true)
 test('Validate appstream file', appstreamcli,
