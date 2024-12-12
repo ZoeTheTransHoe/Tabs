@@ -16,6 +16,13 @@ subdir('data')
 subdir('src')
 subdir('po')
 
+if host_machine.system() == 'windows'
+  subdir('build-aux/windows')
+else
+  subdir('search-provider')
+  subdir('po')
+endif
+
 gnome.post_install(
      glib_compile_schemas: true,
     gtk_update_icon_cache: true,
