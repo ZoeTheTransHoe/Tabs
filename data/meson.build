@@ -1,6 +1,6 @@
 if host_machine.system() == 'windows'
   desktop_file = configure_file(
-    input: 'org.zoey.Tabs.desktop.inn',
+    input: 'org.zoey.Tabs.desktop.in',
     output: app_id + '.desktop.in',
     configuration: conf,
     install: true,
