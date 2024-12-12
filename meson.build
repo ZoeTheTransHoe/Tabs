@@ -15,6 +15,8 @@ subdir('data')
 subdir('src')
 subdir('po')
 
+app_id = 'org.zoey.Tabs'
+prefix = '/org/zoey/Tabs'
 gnome.post_install(
      glib_compile_schemas: true,
     gtk_update_icon_cache: true,
