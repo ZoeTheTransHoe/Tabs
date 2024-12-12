@@ -15,8 +15,15 @@ subdir('data')
 subdir('src')
 subdir('po')
 
-app_id = 'org.zoey.Tabs'
-prefix = '/org/zoey/Tabs'
+profile = get_option('profile')
+if profile == 'development'
+    app_id = 'org.zoey.Tabs.Devel'
+  prefix = '/org/zoey/Tabs/Devel'
+elif profile == 'release'
+  app_id = 'org.zoey.Tabs'
+  prefix = '/org/zoey/Tabs'
+endif
+
 gnome.post_install(
      glib_compile_schemas: true,
     gtk_update_icon_cache: true,
