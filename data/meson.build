@@ -15,6 +15,7 @@ else
         install: true,
     install_dir: get_option('datadir') / 'applications'
   )
+endif 
 
 if host_machine.system() != 'windows'
   desktop_utils = find_program('desktop-file-validate', required: false)
