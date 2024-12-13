@@ -1,11 +1,9 @@
 if host_machine.system() == 'windows'
     desktop_file = configure_file(
           input: 'org.zoey.Tabs.desktop.in',
-        output: 'org.zoey.Tabs.desktop',
-          type: 'desktop',
-        po_dir: '../po',
+        output:  'org.zoey.Tabs.desktop.in',
         install: true,
-    install_dir: get_option('datadir') / 'applications'
+    install_dir: join_paths(get_option('datadir'), 'applications'),
   )
 else
   desktop_file = i18n.merge_file(
