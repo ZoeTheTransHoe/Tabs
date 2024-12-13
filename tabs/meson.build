@@ -30,6 +30,9 @@ tabs_sources = [
   '__init__.py',
   'main.py',
   'welcome.py',
+  'sidebar.py',
+  'create_tab_library.py',
+  'users_tabs.py',
   '../data/style.css',
 ]
 

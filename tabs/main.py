@@ -43,6 +43,7 @@ class TabsApplication(Adw.Application):
         self.set_accels_for_action('win.download', ['<Ctrl>d'])
         self.set_accels_for_action('win.create', ['<Ctrl><Alt>n'])
         self.set_accels_for_action('win.hide_sidebar', ['F9'])
+        self.set_accels_for_action('win.set_fullscreen', ['F11'])
 
     def do_activate(self):
         """Called when the application is activated.
@@ -56,12 +57,12 @@ class TabsApplication(Adw.Application):
         win.present()
     def on_about_action(self, *args):
         """Callback for the app.about action."""
-        about = Adw.AboutDialog(application_name='tabs',
+        about = Adw.AboutDialog(application_name='Tabs',
                                 application_icon='org.zoey.Tabs',
-                                developer_name='zoey',
+                                developer_name='Zoey Ahmed',
                                 version='0.1.0',
-                                developers=['zoey'],
-                                copyright='© 2024 zoey')
+                                developers=['Zoey Ahmed'],
+                                copyright='© 2024 Zoey Ahmed')
         # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
         about.set_translator_credits(_('translator-credits'))
         about.present(self.props.active_window)

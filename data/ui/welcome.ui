@@ -19,27 +19,30 @@
     <property name="content">
       <object class="AdwOverlaySplitView" id="split_view">
         <property name="sidebar">
-          <object class="AdwToolbarView">
-            <child type="top">
-              <object class="AdwHeaderBar">
-                <property name="show-title">False</property>
-                <child type="end">
-                   <object class="GtkMenuButton" id="primary">
-                    <property name="icon-name">open-menu-symbolic</property>
-                    <property name="menu-model">primary_button_menu</property>
-                    <property name="primary">true</property>
+
+          <object class="GtkBox">
+            <property name="orientation">1</property>
+            <child>
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <property name="show-title">False</property>
+                    <child type="end">
+                       <object class="GtkMenuButton" id="primary">
+                        <property name="icon-name">open-menu-symbolic</property>
+                        <property name="menu-model">primary_button_menu</property>
+                        <property name="primary">true</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
             </child>
 
             <child>
-              <object class="GtkScrolledWindow">
-                <child>
-                  <object class="GtkListBox" id="sidebar_list">
-                    <property name="hexpand">True</property>
-                  </object>
-                </child>
+              <object class="GtkListBox" id="sidebar_list">
+                <property name="hexpand">True</property>
+                <style><class name="navigation-sidebar"/></style>
               </object>
             </child>
           </object>
@@ -64,19 +67,30 @@
                     <property name="action-name">win.open</property>
                   </object>
                 </child>
+
+                <child type="end">
+                  <object class="GtkButton" id="fullscreen_button">
+                    <property name="icon-name">arrows-pointing-outward-symbolic</property>
+                    <property name="action-name">win.set_fullscreen</property>
+                  </object>
+                </child>
+
               </object>
             </child>
             <property name="content">
-              <object class="GtkBox">
+              <object class="GtkBox" id="welcome_button_box">
                 <property name="margin-top">18</property>
+                <property name="margin-bottom">36</property>
                 <property name="orientation">1</property>
                 <property name="halign">3</property>
                 <property name="valign">3</property>
+
                 <child>
-                  <object class="AdwClamp">
-                  <property name="maximum-size">300</property>
+                  <object class="AdwClamp" id="welcome_status">
+                    <property name="visible">True</property>
+                    <property name="maximum-size">300</property>
                     <child>
-                      <object class="AdwStatusPage" id="welcome_status">
+                      <object class="AdwStatusPage">
                         <property name="title" translatable="true">Welcome To Tabs 🎸</property>
                         <property name="description" translatable="true">Drag and drop a tab file here</property>
                         <property name="icon-name">library-music-symbolic</property>
@@ -86,7 +100,7 @@
                 </child>
                   
                 <child>
-                  <object class="GtkBox" id="welcome_button_box">
+                  <object class="GtkBox">
                     <property name="margin-top">18</property>
                     <property name="orientation">0</property>
                     <property name="halign">3</property>

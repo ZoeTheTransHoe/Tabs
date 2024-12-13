@@ -10,7 +10,7 @@ python = import('python')
 
 
 subdir('data')
-subdir('src')
+subdir('tabs')
 subdir('po')
 
 gnome.post_install(
