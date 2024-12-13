@@ -62,15 +62,6 @@ if host_machine.system() != 'windows'
   endif
 endif
 
-install_data(
-  configure_file(
-    input: 'org.zoey.Tabs.gschema.xml.in',
-    output: app_id + '.gschema.xml',
-    configuration: conf,
-  ),
-  install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas'),
-)
-
 compile_schemas = find_program('glib-compile-schemas', required: false)
 if compile_schemas.found()
   test(
