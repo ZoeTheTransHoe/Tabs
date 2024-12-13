@@ -12,7 +12,7 @@ gnome.compile_resources(
 
 if host_machine.system() == 'windows'
   desktop_file = configure_file(
-    input: 'page.kramo.Cartridges.desktop.in',
+    input: 'org.zoey.Tabs.desktop.in',
     output: app_id + '.desktop.in',
     configuration: conf,
     install: true,
@@ -21,7 +21,7 @@ if host_machine.system() == 'windows'
 else
   desktop_file = i18n.merge_file(
     input: configure_file(
-      input: 'page.kramo.Cartridges.desktop.in',
+      input: 'org.zoey.Tabs.desktop.in',
       output: app_id + '.desktop.in',
       configuration: conf,
     ),
@@ -42,7 +42,7 @@ endif
 
 if host_machine.system() == 'windows'
   appstream_file = configure_file(
-    input: 'page.kramo.Cartridges.metainfo.xml.in',
+    input: 'org.zoey.Tabs.metainfo.xml.in',
     output: app_id + '.metainfo.xml',
     configuration: conf,
     install: true,
@@ -51,7 +51,7 @@ if host_machine.system() == 'windows'
 else
   appstream_file = i18n.merge_file(
     input: configure_file(
-      input: 'page.kramo.Cartridges.metainfo.xml.in',
+      input: 'org.zoey.Tabs.metainfo.xml.in',
       output: app_id + '.metainfo.xml.in',
       configuration: conf,
     ),
@@ -76,7 +76,7 @@ endif
 
 install_data(
   configure_file(
-    input: 'page.kramo.Cartridges.gschema.xml.in',
+    input: 'org.zoey.Tabs.gschema.xml.in',
     output: app_id + '.gschema.xml',
     configuration: conf,
   ),
