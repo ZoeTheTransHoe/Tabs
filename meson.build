@@ -4,7 +4,10 @@ project('tabs',
   default_options: [ 'warning_level=2', 'werror=false', ],
 )
 
-i18n = import('i18n')
+if host_machine.system() != 'windows'
+  i18n = import('i18n')
+endif
+
 gnome = import('gnome')
 python = import('python')
 
