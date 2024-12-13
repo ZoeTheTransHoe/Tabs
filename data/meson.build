@@ -1,15 +1,3 @@
-gnome.compile_resources(
-  'cartridges',
-  configure_file(
-    input: 'org.zoey.Tabs.gresource.xml.in',
-    output: 'org.zoey.Tabs.gresource.xml',
-    configuration: conf,
-  ),
-  gresource_bundle: true,
-  install: true,
-  install_dir: pkgdatadir,
-)
-
 if host_machine.system() == 'windows'
   desktop_file = configure_file(
     input: 'org.zoey.Tabs.desktop.in',
