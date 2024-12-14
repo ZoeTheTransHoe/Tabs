@@ -27,6 +27,13 @@
                 <child type="top">
                   <object class="AdwHeaderBar">
                     <property name="show-title">False</property>
+                    <child type="start">
+                       <object class="GtkButton">
+                         <property name="icon-name">loupe-large-symbolic</property>
+                         <property name="action-name">win.search</property>
+                      </object>
+                    </child>
+
                     <child type="end">
                        <object class="GtkMenuButton" id="primary">
                         <property name="icon-name">open-menu-symbolic</property>
@@ -40,11 +47,111 @@
             </child>
 
             <child>
-              <object class="GtkListBox" id="sidebar_list">
-                <property name="hexpand">True</property>
-                <style><class name="navigation-sidebar"/></style>
+              <object class="GtkScrolledWindow">
+                <property name="vexpand">True</property>
+                <property name="vexpand-set">True</property>
+                <child>
+                  <object class="GtkListBox" id="sidebar_list">
+                    <property name="hexpand">True</property>
+                    <style><class name="navigation-sidebar"/></style>
+
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="halign">1</property>
+                        <property name="selectable">False</property>
+                        <property name="activatable">False</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label">Tabs</property>
+                            <style>
+                              <class name="dim-label"/>
+                              <class name="caption-heading"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <property name="margin-top">12</property>
+                            <property name="margin-bottom">12</property>
+                            <property name="spacing">12</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="icon_name">library-symbolic</property>
+                                <property name="pixel_size">18</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">All Tabs</property>
+                                <property name="halign">1</property>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel" id="all_tabs_count_label">
+                                <property name="label">0</property>
+                                <property name="halign">2</property>
+                                <property name="hexpand">True</property>
+                                <property name="hexpand-set">True</property>
+                                <style><class name="dim-label"/></style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <child>
+                          <object class="GtkBox">
+                            <property name="margin-top">12</property>
+                            <property name="margin-bottom">12</property>
+                            <property name="spacing">12</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="icon_name">podcast-symbolic</property>
+                                <property name="pixel_size">18</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">Popular Tabs</property>
+                                <property name="halign">1</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkListBoxRow" id="all_artists_label">
+                        <property name="halign">1</property>
+                        <property name="selectable">False</property>
+                        <property name="activatable">False</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label">All Artists</property>
+                            <style>
+                              <class name="dim-label"/>
+                              <class name="caption-heading"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                  </object>
+                </child>
               </object>
             </child>
+
           </object>
         </property>
         <property name="content">
@@ -78,34 +185,68 @@
               </object>
             </child>
             <property name="content">
-              <object class="GtkBox" id="welcome_button_box">
-                <property name="margin-top">18</property>
-                <property name="margin-bottom">36</property>
-                <property name="orientation">1</property>
+              <object class="GtkBox" id="main_content">
                 <property name="halign">3</property>
-                <property name="valign">3</property>
+                <property name="orientation">1</property>
 
                 <child>
-                  <object class="AdwClamp" id="welcome_status">
-                    <property name="visible">True</property>
-                    <property name="maximum-size">300</property>
+                  <object class="GtkScrolledWindow">
                     <child>
-                      <object class="AdwStatusPage">
-                        <property name="title" translatable="true">Welcome To Tabs 🎸</property>
-                        <property name="description" translatable="true">Drag and drop a tab file here</property>
-                        <property name="icon-name">library-music-symbolic</property>
+                      <object class="GtkFlowBox" id="library">
+                        <property name="margin-top">18</property>
+                        <property name="orientation">1</property>
+                        <property name="halign">3</property>
+                        <property name="vexpand">True</property>
+                        <property name="vexpand-set">True</property>
+                        <property name="visible">False</property>
+                        <child>
+                          <object class="GtkButton">
+                            <property name="label">Library Will Go Here...</property>
+                            <property name="action-name">win.download</property>
+                            <style>
+                              <class name="suggested-action"/>
+                              <class name="pill"/>
+                            </style>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
                 </child>
-                  
+
                 <child>
                   <object class="GtkBox">
                     <property name="margin-top">18</property>
+                    <property name="margin-bottom">36</property>
+                    <property name="orientation">1</property>
+                    <property name="halign">3</property>
+                    <property name="valign">3</property>
+                    <property name="vexpand">True</property>
+                    <property name="vexpand-set">True</property>
+                    <child>
+                      <object class="AdwClamp" id="welcome_status">
+                        <property name="visible">True</property>
+                        <property name="maximum-size">300</property>
+                        <child>
+                          <object class="AdwStatusPage">
+                            <property name="title" translatable="true">Welcome To Tabs 🎸</property>
+                            <property name="description" translatable="true">Drag and drop a tab file here</property>
+                            <property name="icon-name">library-music-symbolic</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkBox" id="welcome_button_box">
+                    <property name="margin-bottom">18</property>
                     <property name="orientation">0</property>
                     <property name="halign">3</property>
+                    <property name="valign">2</property>
                     <property name="spacing">18</property>
-                    
+
                     <child>
                       <object class="GtkButton" id="download_tabs_button">
                         <property name="label">Download Tabs...</property>
@@ -127,7 +268,6 @@
                         </style>
                       </object>
                     </child>
-
                   </object>
                 </child>
               </object>
@@ -140,17 +280,39 @@
   <menu id="primary_button_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">_Preferences</attribute>
-        <attribute name="action">app.preferences</attribute>
+        <attribute name="label" translatable="yes">_Open...</attribute>
+        <attribute name="action">win.open</attribute>
       </item>
+      <item>
+        <attribute name="label" translatable="yes">_Search...</attribute>
+        <attribute name="action">win.search</attribute>
+      </item>
+    </section>
+
+    <section>
       <item>
         <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
       </item>
       <item>
+        <attribute name="label" translatable="yes">_Preferences</attribute>
+        <attribute name="action">app.preferences</attribute>
+      </item>
+    </section>
+
+    <section>
+      <item>
         <attribute name="label" translatable="yes">_About Tabs</attribute>
         <attribute name="action">app.about</attribute>
       </item>
+      <item>
+        <attribute name="label" translatable="yes">_Support Tabs!</attribute>
+        <attribute name="action">win.support_tabs</attribute>
+      </item>
     </section>
+
+
+
+
   </menu>
 </interface>

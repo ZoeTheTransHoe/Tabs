@@ -18,9 +18,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import sys
-from time import sleep
-
+import os
 import gi
+from time import sleep
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
@@ -32,18 +32,23 @@ class TabsApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
+        if os.getenv("XDG_CURRENT_DESKTOP") == "COSMIC":
+            Gio.AppInfo.launch_default_for_uri("https://stopthemingmy.app")
+            self.quit()
+
         super().__init__(application_id='org.zoey.Tabs',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
-        self.create_action('preferences', self.on_preferences_action)
+        self.create_action('preferences', self.on_preferences_action, ['<primary>comma'])
 
         #My Own Keyboard Shortcuts (Shove it).
-        self.set_accels_for_action('win.open', ['<Ctrl>o'])
-        self.set_accels_for_action('win.download', ['<Ctrl>d'])
-        self.set_accels_for_action('win.create', ['<Ctrl><Alt>n'])
+        self.set_accels_for_action('win.open', ['<primary>o'])
+        self.set_accels_for_action('win.download', ['<primary>d'])
+        self.set_accels_for_action('win.create', ['<primary><Alt>n'])
         self.set_accels_for_action('win.hide_sidebar', ['F9'])
         self.set_accels_for_action('win.set_fullscreen', ['F11'])
+        self.set_accels_for_action('win.search', ['<primary>s'])
 
     def do_activate(self):
         """Called when the application is activated.

@@ -18,9 +18,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from gi.repository import Adw, Gio, GLib, Gtk, Pango
-from .sidebar import Sidebar
+from .libraryui import LibraryUI
 from .create_tab_library import CreateTabLibrary
-from .users_tabs import UsersTabs
+from .users_tabs_library import UsersTabsLibrary
 
 @Gtk.Template(resource_path='/org/zoey/Tabs/../data/ui/welcome.ui')
 class TabsWelcome(Adw.ApplicationWindow):
@@ -39,9 +39,15 @@ class TabsWelcome(Adw.ApplicationWindow):
     ### Sidebar ###
     split_view = Gtk.Template.Child()
     sidebar_list = Gtk.Template.Child()
+    #Labels
+    all_tabs_count_label = Gtk.Template.Child()
+    all_artists_label = Gtk.Template.Child()
 
     ### Welcome Status Page ###
     welcome_status = Gtk.Template.Child()
+
+    ### Main Library Of Tabs###
+    library =  Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -72,10 +78,20 @@ class TabsWelcome(Adw.ApplicationWindow):
         fullscreen_action.connect("activate", self.set_fullscreen)
         self.add_action(fullscreen_action)
 
+        # Search button
+        search_action = Gio.SimpleAction(name="search")
+        search_action.connect("activate", self.search)
+        self.add_action(search_action)
+
+        # Open Support Tabs Kofi :)
+        support_tabs_action = Gio.SimpleAction(name="support_tabs")
+        support_tabs_action.connect("activate", self.support_tabs)
+        self.add_action(support_tabs_action)
+
         # Calls Methods to Populate Window With Content Where Needed
-        user_tabs = UsersTabs()
-        self.add_sidebar_buttons(user_tabs)
-        self.create_tabs_library(user_tabs)
+        user_tabs_library = UsersTabsLibrary()
+        self.add_sidebar_buttons(user_tabs_library)
+        self.create_tabs_library(user_tabs_library)
 
     ### Open XML Tab File Methods ###
     def open_tabs_file(self, action, _):
@@ -101,7 +117,6 @@ class TabsWelcome(Adw.ApplicationWindow):
         print(file)
         pass
 
-
     ### Sidebar methods###
     def toggle_sidebar(self, action, _):
         """ Reverses visibility status of sidebar"""
@@ -109,34 +124,43 @@ class TabsWelcome(Adw.ApplicationWindow):
         self.split_view.set_show_sidebar(not toggle_status)
 
     def add_sidebar_buttons(self, user_tabs_object):
-        """Populate Sidebar with [All Tabs], [Popular Tabs], and Artists category underneath"""
-        if user_tabs_object.tabs_been_added() == True:
-            all_tabs_button = Gtk.ListBoxRow()
-            all_tabs_label = Gtk.Label()
-            all_tabs_label.set_text("All Tabs")
-            all_tabs_button.set_child(all_tabs_label)
+        """
+        Populate Sidebar with [All Tabs], [Popular Tabs], and Artists category underneath
+        Arg:
+            user_tabs_object: UsersTabsLibrary()
+        Return: True/False if the
+        """
+        try:
+            # Sets Artist label to invisible if the user has no tabs in their library
+            self.all_artists_label.set_visible(user_tabs_object.tabs_been_added())
+            self.all_tabs_count_label.set_label(str(user_tabs_object.number))
 
-            popular_tabs_button = Gtk.ListBoxRow()
-            popular_tabs_label = Gtk.Label()
-            popular_tabs_label.set_text("Popular Tabs")
-            popular_tabs_button.set_child(popular_tabs_label)
-
-            self.sidebar_list.append(all_tabs_button)
-            self.sidebar_list.append(popular_tabs_button)
-        pass
+            # Loops every artist and adds a new widget to the sidebar list
+            sidebar_buttons = LibraryUI()
+            for keys in user_tabs_object.artists:
+                if keys == "Myself":
+                    new_button = sidebar_buttons.create_sidebar_button("pencil-symbolic", keys, user_tabs_object.artists[keys])
+                else:
+                    new_button = sidebar_buttons.create_sidebar_button("people-symbolic", keys, user_tabs_object.artists[keys])
+                self.sidebar_list.append(new_button)
+            return True
+        except:
+            raise Exception
 
     ### Welcome Window Library Methods ###
     def create_tabs_library(self, user_tabs_object):
         """
         Creates users library of tabs as a row. See "Welcome Page (Tabs Already Added)" on Figma for what this should look like.
         """
-        if user_tabs_object.tabs_been_added() == False:
-            #If there are any user added tabs, set Welcome Status as invisible to be replaced with library
+        if user_tabs_object.tabs_been_added():
+            #If there are any user added tabs, set Welcome Status as invisible and library to visible
             self.welcome_status.set_visible(False)
+            self.library.set_visible(True)
+        pass
 
-            #Anchors Create/Download Button Row to bottom of screen
-            self.welcome_button_box.set_valign(2)
-
+    ### Search Methods ###
+    def search(self, action, _):
+        print("Searching...")
         pass
 
     ### Other Methods ###
@@ -158,3 +182,8 @@ class TabsWelcome(Adw.ApplicationWindow):
                 self.fullscreen()
         except:
             print("Issue Fullscreening!") #TODO - Use Adw.Toast for this
+
+    def support_tabs(self, action, _):
+        Gio.AppInfo.launch_default_for_uri("https://ko-fi.com/zoeyahmed")
+        pass
+
