@@ -32,10 +32,6 @@ class TabsApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
-        if os.getenv("XDG_CURRENT_DESKTOP") == "COSMIC":
-            Gio.AppInfo.launch_default_for_uri("https://stopthemingmy.app")
-            self.quit()
-
         super().__init__(application_id='org.zoey.Tabs',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
