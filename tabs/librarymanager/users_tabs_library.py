@@ -35,7 +35,6 @@ class UsersTabsLibrary():
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        print("users_tabs.py/UsersTabs Loaded")
 
     def tabs_been_added(self):
         """

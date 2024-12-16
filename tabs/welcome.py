@@ -17,10 +17,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gio, GLib, Gtk, Pango
-from .libraryui import LibraryUI
-from .create_tab_library import CreateTabLibrary
-from .users_tabs_library import UsersTabsLibrary
+from gi.repository import Adw, Gio, GLib, Gtk
+from tabs.librarymanager.artistsidebar import ArtistSidebar
+from tabs.librarymanager.users_tabs_library import UsersTabsLibrary
 
 @Gtk.Template(resource_path='/org/zoey/Tabs/../data/ui/welcome.ui')
 class TabsWelcome(Adw.ApplicationWindow):
@@ -51,9 +50,16 @@ class TabsWelcome(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        print("welcome.py/TabsWelcome Loaded")
 
-        #Action that opens a file picker accepting either a JSON or MusicXML file to load into app.
+        self.add_actions()
+        # Calls Methods to Populate Window With Content Where Needed
+        user_tabs_library = UsersTabsLibrary()
+        self.add_sidebar_buttons(user_tabs_library)
+        self.create_tabs_library(user_tabs_library)
+
+    ### Adds Actions ###
+    def add_actions(self):
+        # Action that opens a file picker accepting either a JSON or MusicXML file to load into app.
         open_tab_action = Gio.SimpleAction(name="open")
         open_tab_action.connect("activate", self.open_tabs_file)
         self.add_action(open_tab_action)
@@ -88,11 +94,6 @@ class TabsWelcome(Adw.ApplicationWindow):
         support_tabs_action.connect("activate", self.support_tabs)
         self.add_action(support_tabs_action)
 
-        # Calls Methods to Populate Window With Content Where Needed
-        user_tabs_library = UsersTabsLibrary()
-        self.add_sidebar_buttons(user_tabs_library)
-        self.create_tabs_library(user_tabs_library)
-
     ### Open XML Tab File Methods ###
     def open_tabs_file(self, action, _):
         """Open a MusicXML or JSON file using file picker."""
@@ -102,7 +103,6 @@ class TabsWelcome(Adw.ApplicationWindow):
     def open_tabs_file_response(self, dialog, result):
         """
         Tries to send whatever file chosen to processing if a user selects a file
-        and blows up the user if they do not pick a file
         Args:
             result: Either the file the user choose or an error if they do not pick a file.
         """
@@ -110,7 +110,7 @@ class TabsWelcome(Adw.ApplicationWindow):
             file = dialog.open_finish(result)
             self.process_xml(file)
         except GLib.GError:
-            print("Blows u up")
+            print("No File Selected!")
 
     def process_xml(self, file):
         """ Process XML File"""
@@ -136,13 +136,11 @@ class TabsWelcome(Adw.ApplicationWindow):
             self.all_tabs_count_label.set_label(str(user_tabs_object.number))
 
             # Loops every artist and adds a new widget to the sidebar list
-            sidebar_buttons = LibraryUI()
             for keys in user_tabs_object.artists:
                 if keys == "Myself":
-                    new_button = sidebar_buttons.create_sidebar_button("pencil-symbolic", keys, user_tabs_object.artists[keys])
+                    self.sidebar_list.append(ArtistSidebar("pencil-symbolic", keys, user_tabs_object.artists[keys]))
                 else:
-                    new_button = sidebar_buttons.create_sidebar_button("people-symbolic", keys, user_tabs_object.artists[keys])
-                self.sidebar_list.append(new_button)
+                    self.sidebar_list.append(ArtistSidebar("people-symbolic", keys, user_tabs_object.artists[keys]))
             return True
         except:
             raise Exception

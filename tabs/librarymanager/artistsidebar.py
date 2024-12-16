@@ -20,65 +20,48 @@
 from gi.repository import Adw, Gio, GLib, Gtk, Pango
 from .users_tabs_library import UsersTabsLibrary
 
-class LibraryUI(Gtk.ListBox):
-    __gtype_name__ = 'TabSidebar'
+@Gtk.Template(resource_path='/org/zoey/Tabs/../data/ui/artist_sidebar.ui')
+
+class ArtistSidebar(Gtk.ListBoxRow):
+    __gtype_name__ = 'ArtistSidebar'
 
     users_library = UsersTabsLibrary()
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        print("sidebar.py/Sidebar Loaded")
+    ### Boxes ###
+    artist_box = Gtk.Template.Child()
+    ### Labels ###
+    artist_name_label = Gtk.Template.Child()
+    artist_count_label = Gtk.Template.Child()
+    ### Icons ###
+    artist_icon = Gtk.Template.Child()
 
-    def create_sidebar_button(self, icon, artist_name, artists_number):
+    def __init__(self, icon, artist_name, artists_number, **kwargs) -> None:
         """
         Creates a GtkBox with icon, artist name and number of tabs by that artist
         To be appended to the sidebar as a GtkListRow .
         Args:
             icon, artist_name: Str
             artists_number: Int
-        Return: GtkWidget
         """
-        #Box Of Widgets
-        button_box = Gtk.Box()
-        button_box.set_spacing(12)
-        button_box.set_margin_bottom(12)
-        button_box.set_margin_top(12)
+        super().__init__(**kwargs)
 
         #Name Of Artist E.g. David Bowie, Linkin Park, Myself
-        artist_name_label = Gtk.Label()
         try:
-            artist_name_label.set_text(artist_name)
+            self.artist_name_label.set_text(artist_name)
         except:
             raise TypeError("Artist Name Must Be A Str!")
-        artist_name_label.set_halign(1)
 
         #Icon - Either pencil-symbolic for "Myself" or people-symbolic for other artists
-        artist_icon = Gtk.Image()
-        artist_icon.set_pixel_size(18)
         try:
-            artist_icon.set_from_icon_name(icon)
+            self.artist_icon.set_from_icon_name(icon)
         except:
             raise TypeError("Icon Name Must Be A Str!")
 
         #Aritst Number - Must be more than 1 e.g 5, 69
-        artist_number_label = Gtk.Label()
         try:
             if artists_number <= 0:
                 raise ValueError("Artist Number must be more than 0!")
             else:
-                artist_number_label.set_text(str(artists_number))
+                self.artist_count_label.set_text(str(artists_number))
         except:
             raise TypeError("Artist Number Must be An Int!")
-        artist_number_label.set_halign(2)
-        artist_number_label.set_hexpand(True)
-        artist_number_label.set_hexpand_set(True)
-        artist_number_label.add_css_class("dim-label")
-
-        button_box.append(artist_icon)
-        button_box.append(artist_name_label)
-        button_box.append(artist_number_label)
-
-        return button_box
-
-    def create_sidebar_(self):
-        pass

@@ -4,6 +4,8 @@
   <!-- UI Files -->
     <file preprocess="xml-stripblanks">../data/ui/welcome.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
+    <!--  Reusable Components  -->
+    <file preprocess="xml-stripblanks">../data/ui/artist_sidebar.ui</file>
   <!-- Icons -->
     <file preprocess="xml-stripblanks">icons/library-music-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/plus-large-symbolic.svg</file>

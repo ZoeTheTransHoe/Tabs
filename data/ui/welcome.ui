@@ -192,7 +192,7 @@
                 <child>
                   <object class="GtkScrolledWindow">
                     <child>
-                      <object class="GtkFlowBox" id="library">
+                      <object class="GtkBox" id="library">
                         <property name="margin-top">18</property>
                         <property name="orientation">1</property>
                         <property name="halign">3</property>
@@ -200,12 +200,11 @@
                         <property name="vexpand-set">True</property>
                         <property name="visible">False</property>
                         <child>
-                          <object class="GtkButton">
+                          <object class="GtkLabel">
                             <property name="label">Library Will Go Here...</property>
-                            <property name="action-name">win.download</property>
                             <style>
-                              <class name="suggested-action"/>
-                              <class name="pill"/>
+                              <class name="dim-label"/>
+                              <class name="caption-heading"/>
                             </style>
                           </object>
                         </child>

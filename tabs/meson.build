@@ -26,13 +26,12 @@ configure_file(
   install_mode: 'r-xr-xr-x'
 )
 
+install_subdir('librarymanager', install_dir: moduledir)
+
 tabs_sources = [
   '__init__.py',
   'main.py',
   'welcome.py',
-  'libraryui.py',
-  'create_tab_library.py',
-  'users_tabs_library.py',
   '../data/style.css',
 ]
 
