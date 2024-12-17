@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/zoey/Tabs">
+  <!-- UI Files -->
+    <file preprocess="xml-stripblanks">../data/ui/welcome.ui</file>
+    <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
+    <!--  Reusable Components  -->
+    <file preprocess="xml-stripblanks">../data/ui/artist_sidebar.ui</file>
+    <file preprocess="xml-stripblanks">../data/ui/tab_tile.ui</file>
+  <!-- Icons -->
+    <file preprocess="xml-stripblanks">icons/library-music-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/plus-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/dock-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/arrows-pointing-outward-symbolic.svg</file>
+
+    <!--  Sidebar  -->
+    <file preprocess="xml-stripblanks">icons/library-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/podcast-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/people-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/pencil-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/loupe-large-symbolic.svg</file>
+
+  <!-- Pictures -->
+    <file>../data/pictures/Green_Day-American_Idiot.jpeg</file>
+  <!-- CSS Files -->
+    <file alias="style.css">../data/style.css</file>
+
+    </gresource>
+</gresources>
+

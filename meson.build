@@ -7,11 +7,8 @@ project('tabs',
 i18n = import('i18n')
 gnome = import('gnome')
 
-
-
-
 subdir('data')
-subdir('src')
+subdir('tabs')
 subdir('po')
 
 gnome.post_install(

@@ -18,14 +18,15 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import sys
+import os
 import gi
+from time import sleep
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw
-from .window import TabsWindow
-
+from .welcome import TabsWelcome
 
 class TabsApplication(Adw.Application):
     """The main application singleton class."""
@@ -35,7 +36,15 @@ class TabsApplication(Adw.Application):
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
-        self.create_action('preferences', self.on_preferences_action)
+        self.create_action('preferences', self.on_preferences_action, ['<primary>comma'])
+
+        #My Own Keyboard Shortcuts (Shove it).
+        self.set_accels_for_action('win.open', ['<primary>o'])
+        self.set_accels_for_action('win.download', ['<primary>d'])
+        self.set_accels_for_action('win.create', ['<primary><Alt>n'])
+        self.set_accels_for_action('win.hide_sidebar', ['F9'])
+        self.set_accels_for_action('win.set_fullscreen', ['F11'])
+        self.set_accels_for_action('win.search', ['<primary>s'])
 
     def do_activate(self):
         """Called when the application is activated.
@@ -45,17 +54,16 @@ class TabsApplication(Adw.Application):
         """
         win = self.props.active_window
         if not win:
-            win = TabsWindow(application=self)
+            win = TabsWelcome(application=self)
         win.present()
-
     def on_about_action(self, *args):
         """Callback for the app.about action."""
-        about = Adw.AboutDialog(application_name='tabs',
+        about = Adw.AboutDialog(application_name='Tabs',
                                 application_icon='org.zoey.Tabs',
-                                developer_name='zoey',
+                                developer_name='Zoey Ahmed',
                                 version='0.1.0',
-                                developers=['zoey'],
-                                copyright='© 2024 zoey')
+                                developers=['Zoey Ahmed'],
+                                copyright='© 2024 Zoey Ahmed')
         # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
         about.set_translator_credits(_('translator-credits'))
         about.present(self.props.active_window)

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="../data/css/style.css"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+  <template class="ArtistSidebar" parent="GtkListBoxRow">
+      <child>
+          <object class="GtkBox" id="artist_box">
+              <property name="spacing">12</property>
+              <property name="margin_bottom">12</property>
+              <property name="margin_top">12</property>
+
+              <child>
+                  <object class="GtkImage" id="artist_icon">
+                      <property name="pixel-size">18</property>
+                  </object>
+              </child>
+              <child>
+                  <object class="GtkLabel" id="artist_name_label">
+                      <property name="halign">1</property>
+                      <property name="label">Artist</property>
+                  </object>
+              </child>
+
+              <child>
+                  <object class="GtkLabel" id="artist_count_label">
+                      <property name="halign">2</property>
+                      <property name="hexpand">1</property>
+                      <property name="hexpand-set">1</property>
+                      <property name="label">0</property>
+                      <style><class name="dim-label"/></style>
+                  </object>
+              </child>
+          </object>
+      </child>
+  </template>
+</interface>
