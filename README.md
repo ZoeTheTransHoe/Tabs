@@ -31,6 +31,9 @@ Translators, Programmers and Other Musicians are welcome to make pull requests t
 
 For updates and questions, join our [Discord server][discord-url] 
 
+## Follow The Project!
+I Post semi-daily progress on Tabs on my [Mastodon Page](https://social.treehouse.systems/@zoeyTheWitch).
+
 ## 💰 Donations
 I accept donations through [Kofi](https://ko-fi.com/zoeyahmed). Please consider helping me out :3
 

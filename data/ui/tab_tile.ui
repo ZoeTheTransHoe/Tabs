@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="TabTile" parent="GtkBox">
+    <property name="orientation">1</property>
+    <property name="valign">2</property>
+    <property name="margin-start">18</property>
+    <property name="margin-end">18</property>
+    <child>
+      <object class="GtkImage" id="tile_album_cover">
+        <property name="vexpand">True</property>
+        <property name="vexpand-set">True</property>
+        <property name="icon-name">Green_Day-American_Idiot</property>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkLabel" id="tile_artist_then_song_name">
+        <property name="halign">1</property>
+        <property name="wrap">True</property>
+        <property name="ellipsize">end</property>
+        <property name="max_width_chars">20</property>
+        <property name="label">Artist Name - Song Name</property>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkLabel" id="tile_album_name">
+        <property name="halign">1</property>
+        <property name="label">Album Name</property>
+      </object>
+    </child>
+  </template>
+</interface>
