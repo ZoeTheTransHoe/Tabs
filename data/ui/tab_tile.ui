@@ -1,34 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="TabTile" parent="GtkBox">
-    <property name="orientation">1</property>
-    <property name="valign">2</property>
-    <property name="margin-start">18</property>
-    <property name="margin-end">18</property>
-    <child>
-      <object class="GtkImage" id="tile_album_cover">
-        <property name="vexpand">True</property>
-        <property name="vexpand-set">True</property>
-        <property name="icon-name">Green_Day-American_Idiot</property>
-      </object>
-    </child>
+  <template class="TabTile" parent="GtkFlowBoxChild">
+    <property name="child">
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="spacing">12</property>
 
-    <child>
-      <object class="GtkLabel" id="tile_artist_then_song_name">
-        <property name="halign">1</property>
-        <property name="wrap">True</property>
-        <property name="ellipsize">end</property>
-        <property name="max_width_chars">20</property>
-        <property name="label">Artist Name - Song Name</property>
-      </object>
-    </child>
+        <child>
+          <object class="GtkImage" id="tile_album_cover">
+            <property name="vexpand">True</property>
+            <property name="vexpand-set">True</property>
+            <property name="width-request">200</property>
+            <property name="height-request">200</property>
+            <property name="icon-name">icon</property>
+          </object>
+        </child>
 
-    <child>
-      <object class="GtkLabel" id="tile_album_name">
-        <property name="halign">1</property>
-        <property name="label">Album Name</property>
+        <child>
+          <object class="GtkLabel" id="tile_title">
+            <property name="halign">1</property>
+            <property name="wrap">True</property>
+            <property name="ellipsize">end</property>
+            <property name="max_width_chars">15</property>
+            <property name="label">Jesus Of Suburbia - Green Day</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="tile_album_name">
+            <property name="halign">1</property>
+            <property name="label">American Idiot</property>
+          </object>
+        </child>
+
       </object>
-    </child>
+    </property>
   </template>
 </interface>
+

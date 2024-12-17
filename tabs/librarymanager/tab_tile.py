@@ -22,14 +22,18 @@ from .users_tabs_library import UsersTabsLibrary
 
 @Gtk.Template(resource_path='/org/zoey/Tabs/../data/ui/tab_tile.ui')
 
-class TabTile(Gtk.Box):
+class TabTile(Gtk.FlowBoxChild):
     __gtype_name__ = "TabTile"
 
     tile_album_cover = Gtk.Template.Child()
-    tile_artist_then_song_name = Gtk.Template.Child()
+    tile_title = Gtk.Template.Child()
     tile_album_name = Gtk.Template.Child()
 
     def __init__(self) -> None:
         super().__init__()
 
-    pass
+    def add_tile_data(self):
+        """
+
+        """
+        pass

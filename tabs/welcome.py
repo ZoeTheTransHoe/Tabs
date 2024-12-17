@@ -138,12 +138,15 @@ class TabsWelcome(Adw.ApplicationWindow):
             # Loops every artist and adds a new widget to the sidebar list
             for keys in user_tabs_object.artists:
                 new_sidebar_button = ArtistSidebar()
+                new_tab_tile = TabTile()
                 if keys == "Myself":
                     new_sidebar_button.add_sidebar_data("pencil-symbolic", keys, user_tabs_object.artists[keys])
                     self.sidebar_list.append(new_sidebar_button)
+                    self.library_grid.append(new_tab_tile)
                 else:
                     new_sidebar_button.add_sidebar_data("people-symbolic", keys, user_tabs_object.artists[keys])
                     self.sidebar_list.append(new_sidebar_button)
+                    self.library_grid.append(new_tab_tile)
             return True
         except:
             raise Exception
