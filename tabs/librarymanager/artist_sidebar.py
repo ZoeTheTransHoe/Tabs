@@ -70,5 +70,3 @@ class ArtistSidebar(Gtk.ListBoxRow):
                 self.artist_count_label.set_text(str(artists_number))
         except:
             raise TypeError("Artist Number Must be An Int!")
-
-    def
