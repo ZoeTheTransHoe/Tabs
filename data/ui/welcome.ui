@@ -8,7 +8,7 @@
     <property name="default-width">1000</property>
     <property name="default-height">700</property>
     <property name="width-request">600</property>
-    <property name="height-request">500</property>
+    <!-- <property name="height-request">500</property> -->
     <child>
       <object class="AdwBreakpoint">
         <condition>max-width: 820sp</condition>
@@ -185,36 +185,39 @@
               </object>
             </child>
             <property name="content">
-              <object class="GtkBox" id="main_content">
+              <object class="AdwPreferencesPage" id="main_content">
                 <property name="halign">0</property>
-                <property name="orientation">1</property>
                 <child>
-                  <object class="GtkViewport">
-                    <property name="visible">True</property>
-                    <property name="vexpand">False</property>
-                    <property name="vexpand-set">True</property>
+                  <object class="GtkFlowBox" id="library_grid">
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="column-spacing">12</property>
+                    <property name="row-spacing">12</property>
+                    <property name="homogeneous">True</property>
+                    <property name="selection-mode">none</property>
+                    <property name="valign">start</property>
+                    <property name="halign">center</property>
+
                     <child>
-                      <object class="GtkFlowBox" id="library_grid">
-                        <child>
+                      <object class="GtkFlowBoxChild">
+                        <property name="child">
                           <object class="GtkBox">
-                            <property name="width-request">128</property>
-                            <property name="orientation">1</property>
-                            <property name="valign">1</property>
-                            <property name="margin-top">18</property>
-                            <property name="margin-bottom">18</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">12</property>
+
                             <child>
                               <object class="GtkImage">
                                 <property name="vexpand">True</property>
                                 <property name="vexpand-set">True</property>
                                 <property name="height-request">192</property>
-
                                 <property name="icon-name">Green_Day-American_Idiot</property>
                               </object>
                             </child>
 
                             <child>
                               <object class="GtkLabel">
-                                <property name="halign">1</property>
                                 <property name="wrap">True</property>
                                 <property name="ellipsize">end</property>
                                 <property name="max_width_chars">20</property>
@@ -224,224 +227,231 @@
 
                             <child>
                               <object class="GtkLabel">
-                                <property name="halign">1</property>
                                 <property name="label">American Idiot</property>
                               </object>
                             </child>
+
                           </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="width-request">128</property>
-                            <property name="orientation">1</property>
-                            <property name="valign">1</property>
-                            <property name="margin-top">18</property>
-                            <property name="margin-bottom">18</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="vexpand">True</property>
-                                <property name="vexpand-set">True</property>
-                                <property name="height-request">192</property>
-
-                                <property name="icon-name">Green_Day-American_Idiot</property>
-                              </object>
-                            </child>
-
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">1</property>
-                                <property name="wrap">True</property>
-                                <property name="ellipsize">end</property>
-                                <property name="max_width_chars">20</property>
-                                <property name="label">Soundgarden - Jesus Christ Pose</property>
-                              </object>
-                            </child>
-
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">1</property>
-                                <property name="label">Badmotorfinger</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="width-request">128</property>
-                            <property name="orientation">1</property>
-                            <property name="valign">1</property>
-                            <property name="margin-top">18</property>
-                            <property name="margin-bottom">18</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="vexpand">True</property>
-                                <property name="vexpand-set">True</property>
-                                <property name="height-request">192</property>
-
-                                <property name="icon-name">Green_Day-American_Idiot</property>
-                              </object>
-                            </child>
-
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">1</property>
-                                <property name="wrap">True</property>
-                                <property name="ellipsize">end</property>
-                                <property name="max_width_chars">20</property>
-                                <property name="label">Pantera - Cowboys From Hell</property>
-                              </object>
-                            </child>
-
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">1</property>
-                                <property name="label">Cowboys From Hell</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="width-request">128</property>
-                            <property name="orientation">1</property>
-                            <property name="valign">1</property>
-                            <property name="margin-top">18</property>
-                            <property name="margin-bottom">18</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="vexpand">True</property>
-                                <property name="vexpand-set">True</property>
-                                <property name="height-request">192</property>
-
-                                <property name="icon-name">Green_Day-American_Idiot</property>
-                              </object>
-                            </child>
-
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">1</property>
-                                <property name="wrap">True</property>
-                                <property name="ellipsize">end</property>
-                                <property name="max_width_chars">20</property>
-                                <property name="label">Depeche Mode - Enjoy The Silence</property>
-                              </object>
-                            </child>
-
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">1</property>
-                                <property name="label">Violator</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="width-request">128</property>
-                            <property name="orientation">1</property>
-                            <property name="valign">1</property>
-                            <property name="margin-top">18</property>
-                            <property name="margin-bottom">18</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="vexpand">True</property>
-                                <property name="vexpand-set">True</property>
-                                <property name="height-request">192</property>
-
-                                <property name="icon-name">Green_Day-American_Idiot</property>
-                              </object>
-                            </child>
-
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">1</property>
-                                <property name="wrap">True</property>
-                                <property name="ellipsize">end</property>
-                                <property name="max_width_chars">20</property>
-                                <property name="label">Soil - System Of A Down</property>
-                              </object>
-                            </child>
-
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">1</property>
-                                <property name="label">System Of A Down</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="width-request">128</property>
-                            <property name="orientation">1</property>
-                            <property name="valign">1</property>
-                            <property name="margin-top">18</property>
-                            <property name="margin-bottom">18</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="vexpand">True</property>
-                                <property name="vexpand-set">True</property>
-                                <property name="height-request">192</property>
-
-                                <property name="icon-name">Green_Day-American_Idiot</property>
-                              </object>
-                            </child>
-
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">1</property>
-                                <property name="wrap">True</property>
-                                <property name="ellipsize">end</property>
-                                <property name="max_width_chars">20</property>
-                                <property name="label">The Neighbourhood - Female Robbery</property>
-                              </object>
-                            </child>
-
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">1</property>
-                                <property name="label">I Love You</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="width-request">128</property>
-                            <property name="orientation">1</property>
-                            <property name="valign">1</property>
-                            <property name="margin-top">18</property>
-                            <property name="margin-bottom">18</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="vexpand">True</property>
-                                <property name="vexpand-set">True</property>
-                                <property name="height-request">192</property>
-
-                                <property name="icon-name">Green_Day-American_Idiot</property>
-                              </object>
-                            </child>
-
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">1</property>
-                                <property name="wrap">True</property>
-                                <property name="ellipsize">end</property>
-                                <property name="max_width_chars">20</property>
-                                <property name="label">Radiohead - </property>
-                              </object>
-                            </child>
-
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">1</property>
-                                <property name="label">I Love You</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
+                        </property>
                       </object>
                     </child>
+
+                    <child>
+                      <object class="GtkFlowBoxChild">
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">12</property>
+
+                            <child>
+                              <object class="GtkImage">
+                                <property name="vexpand">True</property>
+                                <property name="vexpand-set">True</property>
+                                <property name="height-request">192</property>
+                                <property name="icon-name">Green_Day-American_Idiot</property>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="wrap">True</property>
+                                <property name="ellipsize">end</property>
+                                <property name="max_width_chars">20</property>
+                                <property name="label">Green Day - Jesus Of Suburbia</property>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">American Idiot</property>
+                              </object>
+                            </child>
+
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkFlowBoxChild">
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">12</property>
+
+                            <child>
+                              <object class="GtkImage">
+                                <property name="vexpand">True</property>
+                                <property name="vexpand-set">True</property>
+                                <property name="height-request">192</property>
+                                <property name="icon-name">Green_Day-American_Idiot</property>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="wrap">True</property>
+                                <property name="ellipsize">end</property>
+                                <property name="max_width_chars">20</property>
+                                <property name="label">Green Day - Jesus Of Suburbia</property>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">American Idiot</property>
+                              </object>
+                            </child>
+
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkFlowBoxChild">
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">12</property>
+
+                            <child>
+                              <object class="GtkImage">
+                                <property name="vexpand">True</property>
+                                <property name="vexpand-set">True</property>
+                                <property name="height-request">192</property>
+                                <property name="icon-name">Green_Day-American_Idiot</property>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="wrap">True</property>
+                                <property name="ellipsize">end</property>
+                                <property name="max_width_chars">20</property>
+                                <property name="label">Green Day - Jesus Of Suburbia</property>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">American Idiot</property>
+                              </object>
+                            </child>
+
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkFlowBoxChild">
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">12</property>
+
+                            <child>
+                              <object class="GtkImage">
+                                <property name="vexpand">True</property>
+                                <property name="vexpand-set">True</property>
+                                <property name="height-request">192</property>
+                                <property name="icon-name">Green_Day-American_Idiot</property>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="wrap">True</property>
+                                <property name="ellipsize">end</property>
+                                <property name="max_width_chars">20</property>
+                                <property name="label">Green Day - Jesus Of Suburbia</property>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">American Idiot</property>
+                              </object>
+                            </child>
+
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkFlowBoxChild">
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">12</property>
+
+                            <child>
+                              <object class="GtkImage">
+                                <property name="vexpand">True</property>
+                                <property name="vexpand-set">True</property>
+                                <property name="height-request">192</property>
+                                <property name="icon-name">Green_Day-American_Idiot</property>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="wrap">True</property>
+                                <property name="ellipsize">end</property>
+                                <property name="max_width_chars">20</property>
+                                <property name="label">Green Day - Jesus Of Suburbia</property>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">American Idiot</property>
+                              </object>
+                            </child>
+
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkFlowBoxChild">
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">12</property>
+
+                            <child>
+                              <object class="GtkImage">
+                                <property name="vexpand">True</property>
+                                <property name="vexpand-set">True</property>
+                                <property name="height-request">192</property>
+                                <property name="icon-name">Green_Day-American_Idiot</property>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="wrap">True</property>
+                                <property name="ellipsize">end</property>
+                                <property name="max_width_chars">20</property>
+                                <property name="label">Green Day - Jesus Of Suburbia</property>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">American Idiot</property>
+                              </object>
+                            </child>
+
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+
                   </object>
                 </child>
 
