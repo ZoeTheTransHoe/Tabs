@@ -35,16 +35,21 @@ class ArtistSidebar(Gtk.ListBoxRow):
     ### Icons ###
     artist_icon = Gtk.Template.Child()
 
-    def __init__(self, icon, artist_name, artists_number, **kwargs) -> None:
+    def __init__(self, **kwargs) -> None:
         """
         Creates a GtkBox with icon, artist name and number of tabs by that artist
         To be appended to the sidebar as a GtkListRow .
-        Args:
-            icon, artist_name: Str
-            artists_number: Int
+        No args or return.
         """
         super().__init__(**kwargs)
 
+    def add_sidebar_data(self, icon, artist_name, artists_number):
+        """
+        Adds needed data to make sidebar
+        Args:
+        icon, artist_name: Str
+        artists_number: Int
+        """
         #Name Of Artist E.g. David Bowie, Linkin Park, Myself
         try:
             self.artist_name_label.set_text(artist_name)
@@ -65,3 +70,5 @@ class ArtistSidebar(Gtk.ListBoxRow):
                 self.artist_count_label.set_text(str(artists_number))
         except:
             raise TypeError("Artist Number Must be An Int!")
+
+    def
