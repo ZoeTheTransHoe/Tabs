@@ -18,9 +18,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from gi.repository import Adw, Gio, GLib, Gtk
-from tabs.librarymanager.artist_sidebar import ArtistSidebar
 from tabs.librarymanager.users_tabs_library import UsersTabsLibrary
-from tabs.librarymanager.tab_tile import TabTile
+from tabs.widgets.artist_sidebar import ArtistSidebar
+from tabs.widgets.tab_tile import TabTile
 
 @Gtk.Template(resource_path='/org/zoey/Tabs/../data/ui/welcome.ui')
 class TabsWelcome(Adw.ApplicationWindow):
@@ -138,30 +138,40 @@ class TabsWelcome(Adw.ApplicationWindow):
             # Loops every artist and adds a new widget to the sidebar list
             for keys in user_tabs_object.artists:
                 new_sidebar_button = ArtistSidebar()
-                new_tab_tile = TabTile()
                 if keys == "Myself":
                     new_sidebar_button.add_sidebar_data("pencil-symbolic", keys, user_tabs_object.artists[keys])
                     self.sidebar_list.append(new_sidebar_button)
-                    self.library_grid.append(new_tab_tile)
                 else:
                     new_sidebar_button.add_sidebar_data("people-symbolic", keys, user_tabs_object.artists[keys])
                     self.sidebar_list.append(new_sidebar_button)
-                    self.library_grid.append(new_tab_tile)
             return True
         except:
             raise Exception
 
     # Library Tile
-    def create_tabs_library(self, user_tabs_object):
+    def create_tabs_library(self, user_tabs_object) -> None:
         """
         Creates users library of tabs as a row. See "Welcome Page (Tabs Already Added)" on Figma for what this should look like.
+        Args:
+            user_tabs_object: UsersTabsLibrary()
         """
+        new_tab_tile = TabTile()
         if user_tabs_object.tabs_been_added():
             #If there are any user added tabs, set Welcome Status as invisible and library to visible
             self.welcome_status.set_visible(False)
             self.library_grid.set_visible(True)
 
-            # self.library_grid.set_factory(TabTile())
+            try:
+                # Loops every artist and creates tiles for each of their tabs
+                for keys in user_tabs_object.artists:
+                    artist_tiles = user_tabs_object.search_artists_tabs(keys)
+                    for item in artist_tiles:
+                        print(item)
+                        new_tile = TabTile()
+                        new_tile.add_tile_data(item[0], keys, item[1])
+                        self.library_grid.append(new_tile)
+            except:
+                raise Exception
         pass
 
     #Search

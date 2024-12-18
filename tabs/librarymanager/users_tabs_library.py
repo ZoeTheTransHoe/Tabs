@@ -81,4 +81,20 @@ class UsersTabsLibrary():
 
         return artists_dict_sorted
 
+    def search_artists_tabs(self, search_artist) -> list[list[str]]:
+        """
+        Searches the users library for a given artist, and returns a 2D List of all tabs under that artist, with each
+        Sublist containing the given tabs song and album name for that tab.
+        Arg:
+            search_artist: Str
+        Returns: 2D List
+        """
+
+        artist_tabs_info = []
+        for keys in self.users_library:
+            if self.users_library[keys][0] == search_artist:
+                artist_tabs_info.append([keys,self.users_library[keys][1]])
+
+        return artist_tabs_info
+
 

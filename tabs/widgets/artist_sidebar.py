@@ -17,15 +17,12 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gio, GLib, Gtk, Pango
-from .users_tabs_library import UsersTabsLibrary
+from gi.repository import Gtk
 
 @Gtk.Template(resource_path='/org/zoey/Tabs/../data/ui/artist_sidebar.ui')
 
 class ArtistSidebar(Gtk.ListBoxRow):
     __gtype_name__ = 'ArtistSidebar'
-
-    users_library = UsersTabsLibrary()
 
     ### Boxes ###
     artist_box = Gtk.Template.Child()
@@ -43,7 +40,7 @@ class ArtistSidebar(Gtk.ListBoxRow):
         """
         super().__init__(**kwargs)
 
-    def add_sidebar_data(self, icon, artist_name, artists_number):
+    def add_sidebar_data(self, new_icon, new_artist_name, new_artists_number):
         """
         Adds needed data to make sidebar
         Args:
@@ -52,21 +49,21 @@ class ArtistSidebar(Gtk.ListBoxRow):
         """
         #Name Of Artist E.g. David Bowie, Linkin Park, Myself
         try:
-            self.artist_name_label.set_text(artist_name)
+            self.artist_name_label.set_text(new_artist_name)
         except:
             raise TypeError("Artist Name Must Be A Str!")
 
         #Icon - Either pencil-symbolic for "Myself" or people-symbolic for other artists
         try:
-            self.artist_icon.set_from_icon_name(icon)
+            self.artist_icon.set_from_icon_name(new_icon)
         except:
             raise TypeError("Icon Name Must Be A Str!")
 
         #Aritst Number - Must be more than 1 e.g 5, 69
         try:
-            if artists_number <= 0:
+            if new_artists_number <= 0:
                 raise ValueError("Artist Number must be more than 0!")
             else:
-                self.artist_count_label.set_text(str(artists_number))
+                self.artist_count_label.set_text(str(new_artists_number))
         except:
             raise TypeError("Artist Number Must be An Int!")

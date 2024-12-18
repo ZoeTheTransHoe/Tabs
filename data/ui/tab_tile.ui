@@ -13,7 +13,8 @@
             <property name="vexpand-set">True</property>
             <property name="width-request">200</property>
             <property name="height-request">200</property>
-            <property name="icon-name">icon</property>
+            <property name="icon_name">podcast-symbolic</property>
+            <property name="pixel_size">192</property>
           </object>
         </child>
 

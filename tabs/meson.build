@@ -27,6 +27,7 @@ configure_file(
 )
 
 install_subdir('librarymanager', install_dir: moduledir)
+install_subdir('widgets', install_dir: moduledir)
 
 tabs_sources = [
   '__init__.py',
