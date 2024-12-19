@@ -19,6 +19,8 @@
     <file preprocess="xml-stripblanks">icons/people-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/pencil-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/loupe-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/folder-download-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/music-artist-symbolic.svg</file>
 
   <!-- Pictures -->
     <file>../data/pictures/Green_Day-American_Idiot.jpeg</file>

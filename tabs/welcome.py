@@ -51,8 +51,7 @@ class TabsWelcome(Adw.ApplicationWindow):
         self.add_actions()
         # Calls Methods to Populate Window With UI Content Where Needed
         user_tabs_library = UsersTabsLibrary()
-        self.add_sidebar_buttons(user_tabs_library)
-        self.create_tabs_library(user_tabs_library)
+        self.create_from_library(user_tabs_library)
 
     ### Adds Actions ###
     def add_actions(self):
@@ -77,8 +76,8 @@ class TabsWelcome(Adw.ApplicationWindow):
         self.add_action(hide_sidebar_action)
 
         # Hides sidebar button
-        fullscreen_action = Gio.SimpleAction(name="set_fullscreen")
-        fullscreen_action.connect("activate", self.set_fullscreen)
+        fullscreen_action = Gio.SimpleAction(name="toggle_fullscreen")
+        fullscreen_action.connect("activate", self.toggle_fullscreen)
         self.add_action(fullscreen_action)
 
         # Search button
@@ -116,64 +115,60 @@ class TabsWelcome(Adw.ApplicationWindow):
 
     ### UI methods###
 
-    #Sidebar
     def toggle_sidebar(self, action, _):
         """ Reverses visibility status of sidebar"""
         toggle_status = self.split_view.get_show_sidebar()
         self.split_view.set_show_sidebar(not toggle_status)
 
-    def add_sidebar_buttons(self, user_tabs_object):
+    def toggle_fullscreen(self, action, _):
+        """Asks to reverse fullscreen status when clicked"""
+        try:
+            if self.is_fullscreen():
+                self.unfullscreen()
+                return
+            else:
+                self.fullscreen()
+        except:
+            print("Issue Fullscreening!") #TODO - Use Adw.Toast for this
+
+    def create_from_library(self, user_tabs_object) -> None:
         """
-        Populate Sidebar with [All Tabs], [Popular Tabs], and Artists category underneath
+        Creates UI elements from users library of tabs
+        - Sidebar with [All Tabs], [Popular Tabs], and Artists category underneath
+        - Tiles with all the users tabs, or a Status Page if the users library is empty.
         Arg:
             user_tabs_object: UsersTabsLibrary()
-        Return: True/False if the
+        Return: True/False if the function executed properly
         """
-
-        # Sets Artist label to invisible if the user has no tabs in their library
-        self.all_artists_label.set_visible(user_tabs_object.tabs_been_added())
-        self.all_tabs_count_label.set_label(str(user_tabs_object.number))
-
-        try:
-            # Loops every artist and adds a new widget to the sidebar list
-            for keys in user_tabs_object.artists:
-                new_sidebar_button = ArtistSidebar()
-                if keys == "Myself":
-                    new_sidebar_button.add_sidebar_data("pencil-symbolic", keys, user_tabs_object.artists[keys])
-                    self.sidebar_list.append(new_sidebar_button)
-                else:
-                    new_sidebar_button.add_sidebar_data("people-symbolic", keys, user_tabs_object.artists[keys])
-                    self.sidebar_list.append(new_sidebar_button)
-            return True
-        except:
-            raise Exception
-
-    # Library Tile
-    def create_tabs_library(self, user_tabs_object) -> None:
-        """
-        Creates users library of tabs as a row. See "Welcome Page (Tabs Already Added)" on Figma for what this should look like.
-        Args:
-            user_tabs_object: UsersTabsLibrary()
-        """
-        new_tab_tile = TabTile()
         if user_tabs_object.tabs_been_added():
-            #If there are any user added tabs, set Welcome Status as invisible and library to visible
+            # If there are any user added tabs, set Welcome Status as invisible and library to visible
             self.welcome_status.set_visible(False)
+            self.welcome_button_box.set_visible(False)
             self.library_grid.set_visible(True)
+            # Sets Artist label to invisible if the user has no tabs in their library
+            self.all_artists_label.set_visible(True)
+            self.all_tabs_count_label.set_label(str(user_tabs_object.number))
 
             try:
-                # Loops every artist and creates tiles for each of their tabs
+                # Loops every artist...
                 for keys in user_tabs_object.artists:
-                    artist_tiles = user_tabs_object.search_artists_tabs(keys)
-                    for item in artist_tiles:
-                        print(item)
-                        new_tile = TabTile()
-                        new_tile.add_tile_data(item[0], keys, item[1])
-                        self.library_grid.append(new_tile)
+                    new_sidebar_button = ArtistSidebar()
+                    #...and adds a new widget to the sidebar list for each artist...
+                    if keys == "Myself":
+                        new_sidebar_button.add_sidebar_data("pencil-symbolic", keys, user_tabs_object.artists[keys])
+                        self.sidebar_list.append(new_sidebar_button)
+                    else:
+                        new_sidebar_button.add_sidebar_data("people-symbolic", keys, user_tabs_object.artists[keys])
+                        self.sidebar_list.append(new_sidebar_button)
+
+                        #... then creates tiles for each of their tabs
+                        artist_tiles = user_tabs_object.search_artists_tabs(keys)
+                        for item in artist_tiles:
+                            new_tile = TabTile()
+                            new_tile.add_tile_data(item[0], keys, item[1])
+                            self.library_grid.append(new_tile)
             except:
                 raise Exception
-        pass
-
     #Search
     def search(self, action, _):
         print("Searching...")
@@ -187,17 +182,6 @@ class TabsWelcome(Adw.ApplicationWindow):
     def create_tabs_file(self, action, _):
         """Litteraly Just Prints Create Window"""
         print("Create Window")
-
-    def set_fullscreen(self, action, _):
-        """Asks to reverse fullscreen status when clicked"""
-        try:
-            if self.is_fullscreen():
-                self.unfullscreen()
-                return
-            else:
-                self.fullscreen()
-        except:
-            print("Issue Fullscreening!") #TODO - Use Adw.Toast for this
 
     def support_tabs(self, action, _):
         Gio.AppInfo.launch_default_for_uri("https://ko-fi.com/zoeyahmed")

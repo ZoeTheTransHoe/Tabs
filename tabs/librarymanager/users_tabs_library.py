@@ -33,6 +33,8 @@ class UsersTabsLibrary():
                      "Money?":["Pink Floyd","The Dark Side Of The Moon"],
                      "Anchor":["Thank You Scientist","Terraformer"]}
 
+    # users_library = {}
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
